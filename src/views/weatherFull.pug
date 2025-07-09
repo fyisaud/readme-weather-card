@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title Weather in #{city}
+    style.
+      body {
+        font-family: sans-serif;
+        background: #f0f0f0;
+        padding: 2rem;
+      }
+      .card {
+        background: white;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+  body
+    .card
+      h1 Weather in #{city}
+      p
+        strong Temperature:
+        |  #{temp}°C
+      p
+        strong Description:
+        |  #{desc}
