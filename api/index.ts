@@ -14,7 +14,7 @@ const server: FastifyInstance = Fastify({
 
 server.register(view, {
   engine: { pug },
-  root: path.join(__dirname, 'views'),
+  root: path.join(__dirname, "..", "public", "views"),
   viewExt: 'pug'
 })
 
