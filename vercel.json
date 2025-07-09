@@ -1,8 +1,15 @@
 {
+  "version": 3,
   "builds": [
-    { "src": "package.json", "use": "@vercel/node" }
+    {
+      "src": "api/index.ts",
+      "use": "@vercel/node"
+    }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "dist/server.js" }
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.ts"
+    }
   ]
 }
