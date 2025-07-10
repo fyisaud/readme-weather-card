@@ -1,16 +1,19 @@
 {
   "type": "module",
   "dependencies": {
-    "@fastify/view": "^11.1.0",
+    "@fastify/static": "^8.2.0",
+    "canvas": "^3.1.2",
     "fastify": "^5.4.0",
-    "pug": "^3.0.3"
+    "gifencoder": "^2.0.1",
+    "pug": "^3.0.3",
+    "puppeteer": "^24.12.1"
   },
   "scripts": {
-    "dev": "node --loader ts-node/esm api/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js"
+    "generate": "node --loader ts-node/esm scripts/generate-cards.ts",
+    "preview": "node --loader ts-node/esm scripts/preview-server.ts"
   },
   "devDependencies": {
+    "@types/gifencoder": "^2.0.3",
     "@types/node": "^24.0.12",
     "@types/pug": "^2.0.10",
     "ts-node": "^10.9.2",
