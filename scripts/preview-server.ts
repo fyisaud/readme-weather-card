@@ -16,8 +16,8 @@ fastify.register(fastifyStatic, {
 
 const weatherFrames = [
   {
-    status: "rainy",
-    location: 'Riyadh, Saudi Arabia',
+    status: "sunny",
+    location: 'Riyadh, Saudi Arabia 🇸🇦',
     temp: 37,
     feels_like: 39,
     humidity: 20,
@@ -25,8 +25,8 @@ const weatherFrames = [
     condition: 'Clear Sky, Light Breeze',
   },
   {
-    status: "rainy",
-    location: 'Riyadh, Saudi Arabia',
+    status: "sunny",
+    location: 'Riyadh, Saudi Arabia 🇸🇦',
     temp: 39,
     feels_like: 41,
     humidity: 20,

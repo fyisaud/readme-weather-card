@@ -38,7 +38,7 @@ const themes = fs.readdirSync(themesDir)
 const weatherFrames: WeatherFrame[] = [
   {
     status: "sunny",
-    location: 'Riyadh, Saudi Arabia',
+    location: 'Riyadh, Saudi Arabia 🇸🇦',
     temp: 37,
     feels_like: 39,
     humidity: 20,
@@ -47,9 +47,9 @@ const weatherFrames: WeatherFrame[] = [
   },
   {
     status: "sunny",
-    location: 'Riyadh, Saudi Arabia',
-    temp: 39,
-    feels_like: 41,
+    location: 'Riyadh, Saudi Arabia 🇸🇦',
+    temp: 37,
+    feels_like: 39,
     humidity: 20,
     dew_point: 9,
     condition: 'Clear Sky, Light Breeze',
@@ -59,8 +59,8 @@ const weatherFrames: WeatherFrame[] = [
 const outputDir = path.join(__dirname, '../public/cards')
 if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true })
 
-const width = 255
-const height = 150
+const width = 510
+const height = 300
 
 async function generate() {
   const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
@@ -93,11 +93,10 @@ async function generate() {
     // Create GIF from both frames
     const encoder = new GIFEncoder(width, height)
     const gifPath = path.join(outputDir, `weather-${theme.name}.gif`)
-    const stream = encoder.createWriteStream({
-      repeat: 0,
-      delay: 1000,
-      quality: 1
-    })
+    encoder.setDelay(1000)
+    encoder.setRepeat(0)
+    encoder.setQuality(1)
+    const stream = encoder.createWriteStream({ delay: 1000, repeat: 0, quality: 1})
     stream.pipe(fs.createWriteStream(gifPath))
 
     encoder.start()
