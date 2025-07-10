@@ -1,6 +1,9 @@
 {
+  "backgroundStart": "#0f0f0f",
+  "backgroundEnd": "#1a1a1a",
   "text": "#ffffff",
-  "foregroundText": "#cccccc",
-  "background": "#000000",
-  "iconColor": "#ffffff"
+  "iconColor": "#ffffff",
+  "label": "#bbbbbb",
+  "value": "#ffffff",
+  "condition": "#dddddd"
 }

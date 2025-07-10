@@ -7,9 +7,10 @@ html
         padding: 0;
         box-sizing: border-box;
       }
+
       body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        background-color: #{theme.background};
+        font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+        background: linear-gradient(135deg, #{theme.backgroundStart}, #{theme.backgroundEnd});
         color: #{theme.text};
         width: 510px;
         height: 300px;
@@ -18,61 +19,83 @@ html
         align-items: center;
         overflow: hidden;
       }
+
       .card {
+        backdrop-filter: blur(12px);
+        background-color: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         display: grid;
-        grid-template-columns: auto 1fr 1fr;
-        grid-template-rows: auto repeat(4, 1fr);
-        gap: 8px 8px;
+        grid-template-columns: 1fr 1fr auto;
+        grid-template-rows: auto repeat(3, 1fr);
+        gap: 10px 16px;
         width: 100%;
-        padding: 12px;
-        font-size: 12px;
         height: 100%;
+        padding: 24px;
+        color: inherit;
       }
+
       .card h1 {
-        grid-column: 1 / span 3; 
-        font-size: 30px;
+        grid-column: 1 / span 3;
+        font-size: 28px;
+        font-weight: 600;
         margin-bottom: 8px;
         align-self: start;
+        letter-spacing: 0.5px;
       }
+
       .label {
-        opacity: 0.85;
-        font-size: 30px;
+        opacity: 0.75;
+        font-size: 14px;
+        font-weight: 500;
         grid-column: 1;
-        justify-self: start;
         align-self: center;
+        color: #{theme.label};
       }
+
       .value {
         grid-column: 2;
-        font-size: 24px;
-        justify-self: start;
+        font-size: 18px;
+        font-weight: 500;
         align-self: center;
-        margin-left: 0;
+        justify-self: start;
+        color: #{theme.value};
       }
+
       .icon {
         grid-column: 3;
         grid-row: 2 / span 2;
         align-self: center;
         justify-self: center;
-        width: 96px;
-        height: 96px;
+        width: 88px;
+        height: 88px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        padding: 8px;
       }
+
       svg {
         width: 100%;
         height: 100%;
       }
+
       svg path {
         stroke: #{theme.iconColor};
       }
+
       .condition {
         grid-column: 3;
         grid-row: 4;
-        font-size: 24px;
-        opacity: 1;
+        font-size: 16px;
+        opacity: 0.9;
         align-self: start;
         justify-self: center;
-        margin-top: 6px;
         text-align: center;
+        color: #{theme.condition};
+        margin-top: 4px;
       }
+
   body
     .card
       h1= weather.location
