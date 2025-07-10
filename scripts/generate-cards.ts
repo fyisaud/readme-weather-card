@@ -4,8 +4,11 @@ import pug from 'pug'
 import puppeteer from 'puppeteer'
 import GIFEncoder from 'gifencoder'
 import { createCanvas, loadImage } from 'canvas'
+import { fileURLToPath } from 'url'
+import { getWeather } from '../modules/getWeather.js'
+import type { WeatherFrame } from '../types/types.js'
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname)
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 interface ThemeConfig {
   text: string
@@ -14,18 +17,8 @@ interface ThemeConfig {
   iconColor: string
 }
 
-interface WeatherFrame {
-  status: string
-  location: string
-  temp: number
-  feels_like: number
-  humidity: number
-  dew_point: number
-  condition: string
-}
-
-// Themes
-const themesDir = path.join(__dirname, '../themes')
+// Load themes
+const themesDir = path.join(__dirname, '../configuration/themes')
 const themes = fs.readdirSync(themesDir)
   .filter(f => f.endsWith('.json'))
   .map(filename => ({
@@ -33,28 +26,6 @@ const themes = fs.readdirSync(themesDir)
     config: JSON.parse(fs.readFileSync(path.join(themesDir, filename), 'utf-8')) as ThemeConfig
   }))
 
-// Result should just be alternating between images, but I'll write frame objects for each
-// I'll leave it that way, for potentially extending logic.
-const weatherFrames: WeatherFrame[] = [
-  {
-    status: "sunny",
-    location: 'Riyadh, Saudi Arabia 🇸🇦',
-    temp: 37,
-    feels_like: 39,
-    humidity: 20,
-    dew_point: 9,
-    condition: 'Clear Sky, Light Breeze',
-  },
-  {
-    status: "sunny",
-    location: 'Riyadh, Saudi Arabia 🇸🇦',
-    temp: 37,
-    feels_like: 39,
-    humidity: 20,
-    dew_point: 9,
-    condition: 'Clear Sky, Light Breeze',
-  }
-]
 
 const outputDir = path.join(__dirname, '../public/cards')
 if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true })
@@ -67,10 +38,17 @@ async function generate() {
   const page = await browser.newPage()
   await page.setViewport({ width, height, deviceScaleFactor: 3 })
 
-  const iconSvg1 = fs.readFileSync(path.join(__dirname, `../icons/${weatherFrames[0].status}1.svg`), 'utf-8')
-  const iconSvg2 = fs.readFileSync(path.join(__dirname, `../icons/${weatherFrames[1].status}2.svg`), 'utf-8')
+  const weather = await getWeather()
+  const weatherFrames: WeatherFrame[] = [
+    { ...weather, status: `${weather.status}1` },
+    { ...weather, status: `${weather.status}2` }
+  ]
+
+  const iconSvg1 = fs.readFileSync(path.join(__dirname, `../icons/${weatherFrames[0].status}.svg`), 'utf-8')
+  const iconSvg2 = fs.readFileSync(path.join(__dirname, `../icons/${weatherFrames[1].status}.svg`), 'utf-8')
 
   for (const theme of themes) {
+    // Render frame 1
     const html1 = pug.renderFile(path.join(__dirname, '../views/card.pug'), {
       weather: weatherFrames[0],
       theme: theme.config,
@@ -79,6 +57,7 @@ async function generate() {
     await page.setContent(html1)
     const buffer1 = Buffer.from(await page.screenshot())
 
+    // Render frame 2
     const html2 = pug.renderFile(path.join(__dirname, '../views/card.pug'), {
       weather: weatherFrames[1],
       theme: theme.config,
@@ -87,16 +66,15 @@ async function generate() {
     await page.setContent(html2)
     const buffer2 = Buffer.from(await page.screenshot())
 
-    // PNG
     fs.writeFileSync(path.join(outputDir, `weather-${theme.name}.png`), buffer1)
 
-    // Create GIF from both frames
+    // GIF
     const encoder = new GIFEncoder(width, height)
     const gifPath = path.join(outputDir, `weather-${theme.name}.gif`)
     encoder.setDelay(1000)
     encoder.setRepeat(0)
     encoder.setQuality(1)
-    const stream = encoder.createWriteStream({ delay: 1000, repeat: 0, quality: 1})
+    const stream = encoder.createWriteStream({quality: 1, repeat: 0, delay: 1000}) // Still expects args
     stream.pipe(fs.createWriteStream(gifPath))
 
     encoder.start()

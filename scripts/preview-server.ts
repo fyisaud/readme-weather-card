@@ -16,27 +16,27 @@ fastify.register(fastifyStatic, {
 
 const weatherFrames = [
   {
-    status: "sunny",
-    location: 'Riyadh, Saudi Arabia 🇸🇦',
+    status: "cloudy",
+    location: 'Riyadh, SA 🇸🇦',
     temp: 37,
     feels_like: 39,
     humidity: 20,
     dew_point: 9,
-    condition: 'Clear Sky, Light Breeze',
+    condition: 'Moderate clouds',
   },
   {
-    status: "sunny",
+    status: "cloudy",
     location: 'Riyadh, Saudi Arabia 🇸🇦',
     temp: 39,
     feels_like: 41,
     humidity: 20,
     dew_point: 9,
-    condition: 'Clear Sky, Light Breeze',
+    condition: 'Moderate clouds',
   }
 ]
 
 // Load themes
-const themesDir = path.join(__dirname, '../themes')
+const themesDir = path.join(__dirname, '../configuration/themes')
 const themes = fs.readdirSync(themesDir)
   .filter(f => f.endsWith('.json'))
   .reduce((acc, filename) => {
@@ -79,5 +79,5 @@ fastify.get('/', async (request, reply) => {
 fastify.listen({ port: 3000 }, (err) => {
   if (err) throw err
   console.log(`🚀 Preview server running at: http://localhost:3000?theme=dark&frame=0`)
-  console.log(`Try: http://localhost:3000?theme=dark&frame=1`)
+  console.log(`Navigate between frames by editing the "frame" paramater (0-1)`)
 })

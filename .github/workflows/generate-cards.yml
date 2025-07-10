@@ -26,6 +26,8 @@ jobs:
 
       - name: Run weather card generator
         run: npm run generate
+        env:
+           OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
 
       - name: Commit and push changes
         run: |

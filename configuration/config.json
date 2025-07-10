@@ -1,0 +1,9 @@
+{
+  "port": 3000,
+  "openweathermap": {
+    "cityID": 108410,
+    "lat": 24.7136,
+    "lon": 46.6753,
+    "unitsDisplay": "metric"
+  }
+}
