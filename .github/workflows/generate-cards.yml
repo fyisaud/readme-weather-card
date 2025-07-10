@@ -32,7 +32,8 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add public/cards
-          git diff --cached --quiet || git commit -m "Chore: update generated weather cards"
+          git diff --cached --quiet || git commit -m "chore: update generated weather cards"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
