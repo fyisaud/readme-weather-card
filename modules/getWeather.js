@@ -36,6 +36,10 @@ function countryCodeToFlagEmoji(countryCode) {
     .join('')
 }
 
+function capitalizeFirstLetter(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
+
 export async function getWeather() {
   const config = await getConfig()
   const apiKey = process.env.OPENWEATHER_API_KEY
@@ -64,6 +68,6 @@ export async function getWeather() {
     feels_like: Math.round(data.main.feels_like),
     humidity: data.main.humidity,
     dew_point: Math.round(data.main.temp - ((100 - data.main.humidity) / 5)), // rough approximation
-    condition: `${description}, ${data.wind.speed} m/s`,
+    condition: capitalizeFirstLetter(`${description}, ${data.wind.speed} m/s`),
   }
 }
