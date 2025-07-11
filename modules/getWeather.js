@@ -73,7 +73,7 @@ export async function getWeather() {
   const description = data.weather[0].description
 
   const baseIcon = getIconBaseFromWeatherId(weatherId, icon)
-  const timezoneHours = timezone / 3600;
+  const timezoneHours = data.timezone / 3600;
   const localTimestamp = (data.dt + data.timezone) * 1000;
   const sign = timezoneHours >= 0 ? '+' : '-';
 
