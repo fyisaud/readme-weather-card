@@ -49,7 +49,7 @@
 ## ❓ Usage
 
 <details>
-  <summary>How to Set Up Your Weather Card</summary>
+  <summary>Click to show installation instructions</summary>
   <ol>
     <li>Clone or fork this repository</li>
     <li>Edit <code>/configuration/config.json</code> to match your city:
