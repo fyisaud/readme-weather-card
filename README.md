@@ -39,9 +39,18 @@
         <td>Plurple</td>
         <td><img src="https://raw.githubusercontent.com/Shiawaseu/readme-weather-card/main/public/cards/weather-plurple.png" alt="Plurple theme" /></td>
       </tr>
+      <tr>
+        <td>GitHub-dark</td>
+        <td><img src="https://raw.githubusercontent.com/Shiawaseu/readme-weather-card/main/public/cards/weather-github-dark.png" alt="GitHub-dark theme" /></td>
+      </tr>
+      <tr>
+        <td>GitHub-light</td>
+        <td><img src="https://raw.githubusercontent.com/Shiawaseu/readme-weather-card/main/public/cards/weather-github-light.png" alt="GitHub-light theme" /></td>
+      </tr>
     </tbody>
   </table>
 </details>
+
 
 
 ---
