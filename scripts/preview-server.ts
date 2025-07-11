@@ -21,7 +21,7 @@ const weatherFrames = [
     temp: 37,
     feels_like: 39,
     humidity: 20,
-    time: '7:19:21 PM',
+    time: '7:19:21 PM (UTC+3)',
     date: '2025/7/11',
     condition: 'Moderate clouds',
   },
@@ -31,7 +31,7 @@ const weatherFrames = [
     temp: 39,
     feels_like: 41,
     humidity: 20,
-    time: '7:34:53 PM',
+    time: '7:34:53 PM (UTC+3)',
     date: '2025/7/11',
     condition: 'Moderate clouds',
   }

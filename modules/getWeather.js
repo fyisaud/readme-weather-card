@@ -96,6 +96,6 @@ export async function getWeather() {
     humidity: data.main.humidity,
     time: `${config.use12hourformat ? to12HourFormat(localDate) : timeStr} (UTC${sign}${Math.abs(timezoneHours)})`,
     date: dateStr,
-    condition: capitalizeFirstLetter(`${description}, wind ${data.wind.speed} m/s`),
+    condition: capitalizeFirstLetter(`${description} (${data.wind.speed} m/s)`),
   }
 }
