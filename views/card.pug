@@ -28,7 +28,7 @@ html
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         display: grid;
         grid-template-columns: 1fr 1fr auto;
-        grid-template-rows: auto repeat(3, 1fr);
+        grid-template-rows: auto repeat(4, 1fr);
         gap: 10px 16px;
         width: 100%;
         height: 100%;
@@ -38,6 +38,7 @@ html
 
       .card h1 {
         grid-column: 1 / span 3;
+        grid-row: 1;
         font-size: 28px;
         font-weight: 600;
         margin-bottom: 8px;
@@ -47,7 +48,7 @@ html
 
       .label {
         opacity: 0.75;
-        font-size: 14px;
+        font-size: 24px;
         font-weight: 500;
         grid-column: 1;
         align-self: center;
@@ -61,18 +62,36 @@ html
         align-self: center;
         justify-self: start;
         color: #{theme.value};
+        background-color: #{theme.valuebg};
+        padding: 4px;
+        border-radius: 10px;
+      }
+
+      .time {
+        grid-column: 3;
+        grid-row: 1;
+        color: #{theme.time};
+        font-size: 16px;
+        font-weight: 500;
+        opacity: 0.9;
+        margin-left: -25px;
+        justify-self: center;
+        align-self: end;
+        margin-bottom: 8px;
+        text-align: center;
       }
 
       .icon {
         grid-column: 3;
         grid-row: 2 / span 2;
         align-self: center;
-        justify-self: center;
+        justify-self: start;
+        margin-left: -15px;
         width: 88px;
         height: 88px;
         background: rgba(255, 255, 255, 0.1);
         border-radius: 50%;
-        padding: 8px;
+        padding: 10px;
       }
 
       svg {
@@ -90,29 +109,42 @@ html
         font-size: 16px;
         opacity: 0.9;
         align-self: start;
-        justify-self: center;
+        justify-self: start;
+        margin-left: -32px;
         text-align: center;
         color: #{theme.condition};
         margin-top: 4px;
       }
 
+      // Explicit row assignments for labels and values
+      .label.temperature { grid-row: 2; }
+      .value.temperature { grid-row: 2; }
+      .label.feels_like { grid-row: 3; }
+      .value.feels_like { grid-row: 3; }
+      .label.humidity { grid-row: 4; }
+      .value.humidity { grid-row: 4; }
+      .label.date { grid-row: 5; }
+      .value.date { grid-row: 5; }
+
   body
     .card
       h1= weather.location
 
-      .label Temperature:
-      .value #{weather.temp}°C
+      .label.temperature Temperature:
+      .value.temperature #{weather.temp}°C
+
+      .label.feels_like Feels like:
+      .value.feels_like #{weather.feels_like}°C
+
+      .label.humidity Humidity:
+      .value.humidity #{weather.humidity}%
+
+      .time #{weather.time}
 
       .icon
         != iconSvg
 
-      .label Feels like:
-      .value #{weather.feels_like}°C
-
       .condition #{weather.condition}
 
-      .label Humidity:
-      .value #{weather.humidity}%
-
-      .label Dew point:
-      .value #{weather.dew_point}°C
+      .label.date Updated:
+      .value.date #{weather.date}

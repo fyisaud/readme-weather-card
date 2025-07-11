@@ -4,7 +4,8 @@ export interface WeatherFrame {
   temp: number
   feels_like: number
   humidity: number
-  dew_point: number
+  time: string
+  date: string;
   condition: string
 }
 

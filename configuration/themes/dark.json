@@ -4,6 +4,8 @@
   "text": "#ffffff",
   "iconColor": "#ffffff",
   "label": "#bbbbbb",
-  "value": "#ffffff",
-  "condition": "#dddddd"
+  "value": "#000000",
+  "valuebg": "#ffffff",
+  "condition": "#dddddd",
+  "time": "#cccccc"
 }

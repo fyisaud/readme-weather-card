@@ -40,6 +40,19 @@ function capitalizeFirstLetter(val) {
     return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
 
+function to12HourFormat(date) {
+  let hours = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+  const seconds = date.getUTCSeconds();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${ampm}`;
+}
+
+
 export async function getWeather() {
   const config = await getConfig()
   const apiKey = process.env.OPENWEATHER_API_KEY
@@ -60,14 +73,29 @@ export async function getWeather() {
   const description = data.weather[0].description
 
   const baseIcon = getIconBaseFromWeatherId(weatherId, icon)
+  const timezoneHours = timezone / 3600;
+  const localTimestamp = (data.dt + data.timezone) * 1000;
+  const sign = timezoneHours >= 0 ? '+' : '-';
 
+  const localDate = new Date(localTimestamp);
+
+  //  YYYY/MM/DD
+  const dateStr = localDate.getUTCFullYear() + '/' +
+                String(localDate.getUTCMonth() + 1).padStart(2, '0') + '/' +
+                String(localDate.getUTCDate()).padStart(2, '0');
+
+  // HH:MM:SS
+  const timeStr = String(localDate.getUTCHours()).padStart(2, '0') + ':' +
+                String(localDate.getUTCMinutes()).padStart(2, '0') + ':' +
+                String(localDate.getUTCSeconds()).padStart(2, '0');
   return {
     status: baseIcon,
     location: `${data.name}, ${data.sys.country} ${countryCodeToFlagEmoji(data.sys.country)}`,
     temp: Math.round(data.main.temp),
     feels_like: Math.round(data.main.feels_like),
     humidity: data.main.humidity,
-    dew_point: Math.round(data.main.temp - ((100 - data.main.humidity) / 5)), // rough approximation
-    condition: capitalizeFirstLetter(`${description}, ${data.wind.speed} m/s`),
+    time: `${config.use12hourformat ? to12HourFormat(timeStr) : timeStr} (UTC${sign}${Math.abs(timezoneHours)})`,
+    date: dateStr,
+    condition: capitalizeFirstLetter(`${description}, wind ${data.wind.speed} m/s`),
   }
 }

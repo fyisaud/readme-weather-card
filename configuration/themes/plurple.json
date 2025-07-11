@@ -3,7 +3,9 @@
   "backgroundEnd": "#928dab",
   "text": "#ffffff",
   "iconColor": "#ffffff",
-  "label": "#cccccc",
-  "value": "#ffffff",
-  "condition": "#f0f0f0"
+  "label": "#dddddd",
+  "value": "#000000",
+  "valuebg": "#ffffff",
+  "condition": "#f5f5f5",
+  "time": "#eeeeee"
 }
