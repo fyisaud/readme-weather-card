@@ -16,14 +16,58 @@
 
 ## 🖼️ Example Themes
 
-| Theme | Preview |
-|-------|---------|
-| Dark (Default) | ![](https://raw.githubusercontent.com/Shiawaseu/readme-weather-card/main/public/cards/weather-dark.png) |
-| Light    | ![](https://raw.githubusercontent.com/Shiawaseu/readme-weather-card/main/public/cards/weather-light.png) |
-| Plurple   | ![](https://raw.githubusercontent.com/Shiawaseu/readme-weather-card/main/public/cards/weather-plurple.png) |
+<details>
+  <summary>Click here to preview themes</summary>
+  <br/>
+  <table>
+    <thead>
+      <tr>
+        <th>Theme</th>
+        <th>Preview</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Dark (Default)</td>
+        <td><img src="https://raw.githubusercontent.com/Shiawaseu/readme-weather-card/main/public/cards/weather-dark.png" alt="Dark theme" /></td>
+      </tr>
+      <tr>
+        <td>Light</td>
+        <td><img src="https://raw.githubusercontent.com/Shiawaseu/readme-weather-card/main/public/cards/weather-light.png" alt="Light theme" /></td>
+      </tr>
+      <tr>
+        <td>Plurple</td>
+        <td><img src="https://raw.githubusercontent.com/Shiawaseu/readme-weather-card/main/public/cards/weather-plurple.png" alt="Plurple theme" /></td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+
 
 ---
 
-## Usage
+## ❓ Usage
 
-- Soon!
+<details>
+  <summary>Click to show installation instructions</summary>
+  <ol>
+    <li>Clone or fork this repository</li>
+    <li>Edit <code>/configuration/config.json</code> to match your city:
+      <ul>
+        <li>For city IDs, visit <a href="http://bulk.openweathermap.org/sample/">this page</a> or use the <a href="https://openweathermap.org/find">search tool</a> and copy the ID from the URL</li>
+        <li>Longitude and latitude are <strong>optional</strong> but improve accuracy</li>
+      </ul>
+    </li>
+    <li>Register at <a href="https://openweathermap.org/">OpenWeather</a> and create your API key <a href="https://home.openweathermap.org/api_keys">here</a></li>
+    <li>Go to your GitHub repo's <strong>Settings &gt; Secrets and variables &gt; Actions &gt; Repository secrets</strong> and add:
+      <ul>
+        <li><code>OPENWEATHER_API_KEY</code> with your API key as the value</li>
+      </ul>
+    </li>
+    <li>You're done! Optionally, add a new theme file to <code>/configuration/themes</code>:
+      <ul>
+        <li>Note: more themes = more compile time in the GitHub Actions workflow</li>
+      </ul>
+    </li>
+  </ol>
+</details>
