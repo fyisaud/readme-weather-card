@@ -6,9 +6,11 @@
 
 ## Features
 
-- ✅ GitHub-compatible, exported as PNG/GIF image output
+- ✅ GitHub-compatible, exported as `PNG/GIF` image output
 - 🎨 Multiple theme support, with easy configuration
-- ⚡ Fast preview with GitHub Actions or Puppeteer
+- ⚡ Fast preview while designing with `Fastify`
+- ⚒️ Builds with `Github Actions`, and updates every 30 minutes!
+
 
 ---
 
